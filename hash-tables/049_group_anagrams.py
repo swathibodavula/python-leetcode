@@ -26,7 +26,29 @@ def group_anagrams(strs):
     
     return(anagrams)
 
+def group_anagrams2(strs):
+    """ Given a list of strings, group all anagrams together...
+    Time: O(n * k) - n strings, maximum of length k characters    
+    Space: O(n*k)"""
+
+    anagrams = {}
+    for word in strs:
+       counts = [0]*26
+
+       for letter in word:
+           counts[ord(letter) - ord('a')] += 1
+
+       key = tuple(counts)
+       if key not in anagrams:
+           anagrams[key] = []
+       anagrams[key].append(word)
+
+    return list(anagrams.values())
+
 if __name__ == "__main__":
     print(group_anagrams(["eat","tea","tan","ate","nat","bat"]))
     print(group_anagrams([""]))
-        
+
+    print(group_anagrams2(["eat","tea","tan","ate","nat","bat"]))
+    print(group_anagrams2([""]))
+
